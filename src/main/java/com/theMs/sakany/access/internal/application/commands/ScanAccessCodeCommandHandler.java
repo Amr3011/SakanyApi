@@ -4,6 +4,7 @@ import com.theMs.sakany.access.internal.domain.AccessCode;
 import com.theMs.sakany.access.internal.domain.AccessCodeRepository;
 import com.theMs.sakany.access.internal.domain.VisitLog;
 import com.theMs.sakany.access.internal.domain.VisitLogRepository;
+import com.theMs.sakany.shared.exception.BusinessRuleException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,10 @@ public class ScanAccessCodeCommandHandler {
     public UUID handle(ScanAccessCodeCommand command) {
         AccessCode accessCode = accessCodeRepository.findByCode(command.code())
             .orElseThrow(() -> new IllegalArgumentException("Access code not found: " + command.code()));
+
+        if (visitLogRepository.existsByAccessCodeId(accessCode.getId())) {
+            throw new BusinessRuleException("This access code has already been used");
+        }
 
         // Validate and use the access code
         accessCode.use();

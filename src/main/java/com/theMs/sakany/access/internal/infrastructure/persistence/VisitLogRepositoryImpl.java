@@ -57,4 +57,9 @@ public class VisitLogRepositoryImpl implements VisitLogRepository {
             .map(mapper::toDomain)
             .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean existsByAccessCodeId(UUID accessCodeId) {
+        return jpaRepository.existsByAccessCodeId(accessCodeId);
+    }
 }
