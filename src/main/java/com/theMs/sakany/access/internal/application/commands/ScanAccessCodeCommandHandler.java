@@ -25,7 +25,7 @@ public class ScanAccessCodeCommandHandler {
     }
 
     @Transactional
-    public UUID handle(ScanAccessCodeCommand command) {
+    public ScanAccessCodeResult handle(ScanAccessCodeCommand command) {
         AccessCode accessCode = accessCodeRepository.findByCode(command.code())
             .orElseThrow(() -> new IllegalArgumentException("Access code not found: " + command.code()));
 
@@ -49,6 +49,6 @@ public class ScanAccessCodeCommandHandler {
 
         VisitLog savedVisitLog = visitLogRepository.save(visitLog);
 
-        return savedVisitLog.getId();
+        return new ScanAccessCodeResult(savedVisitLog.getId(), accessCode);
     }
 }
