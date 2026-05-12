@@ -34,6 +34,7 @@ public class AccessCodeRepositoryImpl implements AccessCodeRepository {
         entity.setCode(accessCode.getCode());
         entity.setQrData(accessCode.getQrData());
         entity.setSingleUse(accessCode.isSingleUse());
+        entity.setUsageCount(accessCode.getUsageCount());
         entity.setValidFrom(accessCode.getValidFrom());
         entity.setValidUntil(accessCode.getValidUntil());
         entity.setStatus(accessCode.getStatus());
