@@ -15,6 +15,7 @@ public record AccessCodeResponse(
     String code,
     String qrData,
     boolean isSingleUse,
+    Integer usageCount,
     Instant validFrom,
     Instant validUntil,
     AccessCodeStatus status,

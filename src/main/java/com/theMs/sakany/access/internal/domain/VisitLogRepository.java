@@ -10,4 +10,5 @@ public interface VisitLogRepository {
     List<VisitLog> findByResidentId(UUID residentId);
     List<VisitLog> findByAccessCodeId(UUID accessCodeId);
     boolean existsByAccessCodeId(UUID accessCodeId);
+    long countByAccessCodeId(UUID accessCodeId);
 }

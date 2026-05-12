@@ -29,8 +29,15 @@ public class ScanAccessCodeCommandHandler {
         AccessCode accessCode = accessCodeRepository.findByCode(command.code())
             .orElseThrow(() -> new IllegalArgumentException("Access code not found: " + command.code()));
 
-        if (visitLogRepository.existsByAccessCodeId(accessCode.getId())) {
+        if (accessCode.isSingleUse() && visitLogRepository.existsByAccessCodeId(accessCode.getId())) {
             throw new BusinessRuleException("This access code has already been used");
+        }
+
+        if (!accessCode.isSingleUse() && accessCode.getUsageCount() != null) {
+            long usedCount = visitLogRepository.countByAccessCodeId(accessCode.getId());
+            if (usedCount >= accessCode.getUsageCount()) {
+                throw new BusinessRuleException("This access code has reached its usage limit");
+            }
         }
 
         // Validate and use the access code

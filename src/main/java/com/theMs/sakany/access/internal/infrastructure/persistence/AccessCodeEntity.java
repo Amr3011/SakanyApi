@@ -36,6 +36,9 @@ public class AccessCodeEntity extends BaseEntity {
     @Column(name = "is_single_use", nullable = false)
     private boolean isSingleUse;
 
+    @Column(name = "usage_count")
+    private Integer usageCount;
+
     @Column(name = "valid_from", nullable = false)
     private Instant validFrom;
 
@@ -59,6 +62,7 @@ public class AccessCodeEntity extends BaseEntity {
         String code,
         String qrData,
         boolean isSingleUse,
+        Integer usageCount,
         Instant validFrom,
         Instant validUntil,
         com.theMs.sakany.access.internal.domain.AccessCodeStatus status,
@@ -71,6 +75,7 @@ public class AccessCodeEntity extends BaseEntity {
         this.code = code;
         this.qrData = qrData;
         this.isSingleUse = isSingleUse;
+        this.usageCount = usageCount;
         this.validFrom = validFrom;
         this.validUntil = validUntil;
         this.status = status;
@@ -132,6 +137,14 @@ public class AccessCodeEntity extends BaseEntity {
 
     public void setSingleUse(boolean singleUse) {
         isSingleUse = singleUse;
+    }
+
+    public Integer getUsageCount() {
+        return usageCount;
+    }
+
+    public void setUsageCount(Integer usageCount) {
+        this.usageCount = usageCount;
     }
 
     public Instant getValidFrom() {

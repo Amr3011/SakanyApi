@@ -62,4 +62,9 @@ public class VisitLogRepositoryImpl implements VisitLogRepository {
     public boolean existsByAccessCodeId(UUID accessCodeId) {
         return jpaRepository.existsByAccessCodeId(accessCodeId);
     }
+
+    @Override
+    public long countByAccessCodeId(UUID accessCodeId) {
+        return jpaRepository.countByAccessCodeId(accessCodeId);
+    }
 }

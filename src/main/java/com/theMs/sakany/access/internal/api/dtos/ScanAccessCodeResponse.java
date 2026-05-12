@@ -14,6 +14,7 @@ public record ScanAccessCodeResponse(
     Instant validUntil,
     AccessCodeStatus status,
     boolean isSingleUse,
+    Integer usageCount,
     Instant usedAt
 ) {
 }

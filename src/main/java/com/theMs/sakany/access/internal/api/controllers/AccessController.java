@@ -90,6 +90,7 @@ public class AccessController {
             request.visitorPhone(),
             request.purpose(),
             request.isSingleUse(),
+            request.usageCount(),
             request.validFrom(),
             request.validUntil()
         );
@@ -148,6 +149,7 @@ public class AccessController {
                 accessCode.getValidUntil(),
                 accessCode.getStatus(),
                 accessCode.isSingleUse(),
+                accessCode.getUsageCount(),
                 accessCode.getUsedAt()
             ),
             HttpStatus.CREATED
@@ -247,6 +249,7 @@ public class AccessController {
             accessCode.getCode(),
             accessCode.getQrData(),
             accessCode.isSingleUse(),
+            accessCode.getUsageCount(),
             accessCode.getValidFrom(),
             accessCode.getValidUntil(),
             accessCode.getStatus(),

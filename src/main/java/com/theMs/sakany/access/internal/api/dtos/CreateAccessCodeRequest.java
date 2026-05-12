@@ -9,6 +9,7 @@ public record CreateAccessCodeRequest(
     String visitorPhone,
     VisitPurpose purpose,
     boolean isSingleUse,
+    Integer usageCount,
     Instant validFrom,
     Instant validUntil
 ) {
