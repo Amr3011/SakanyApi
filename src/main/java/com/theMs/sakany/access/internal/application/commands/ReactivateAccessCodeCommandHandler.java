@@ -40,6 +40,7 @@ public class ReactivateAccessCodeCommandHandler {
                 code,
                 qrData,
                 oldAccessCode.isSingleUse(),
+            oldAccessCode.getUsageCount(),
                 command.validFrom(),
                 command.validUntil()
         );
