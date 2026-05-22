@@ -9,4 +9,6 @@ public interface VisitLogRepository {
     Optional<VisitLog> findById(UUID id);
     List<VisitLog> findByResidentId(UUID residentId);
     List<VisitLog> findByAccessCodeId(UUID accessCodeId);
+    boolean existsByAccessCodeId(UUID accessCodeId);
+    long countByAccessCodeId(UUID accessCodeId);
 }

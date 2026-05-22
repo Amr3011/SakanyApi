@@ -17,6 +17,7 @@ public class AccessCode extends AggregateRoot {
     private String code;
     private String qrData;
     private boolean isSingleUse;
+    private Integer usageCount;
     private Instant validFrom;
     private Instant validUntil;
     private AccessCodeStatus status;
@@ -31,6 +32,7 @@ public class AccessCode extends AggregateRoot {
         String code,
         String qrData,
         boolean isSingleUse,
+        Integer usageCount,
         Instant validFrom,
         Instant validUntil,
         AccessCodeStatus status,
@@ -44,6 +46,7 @@ public class AccessCode extends AggregateRoot {
         this.code = code;
         this.qrData = qrData;
         this.isSingleUse = isSingleUse;
+        this.usageCount = usageCount;
         this.validFrom = validFrom;
         this.validUntil = validUntil;
         this.status = status;
@@ -58,12 +61,17 @@ public class AccessCode extends AggregateRoot {
         String code,
         String qrData,
         boolean isSingleUse,
+        Integer usageCount,
         Instant validFrom,
         Instant validUntil
     ) {
         // Validate invariants
         if (validUntil.isBefore(validFrom) || validUntil.equals(validFrom)) {
             throw new IllegalArgumentException("validUntil must be after validFrom");
+        }
+
+        if (usageCount != null && usageCount < 1) {
+            throw new IllegalArgumentException("usageCount must be at least 1");
         }
 
         AccessCode accessCode = new AccessCode(
@@ -75,6 +83,7 @@ public class AccessCode extends AggregateRoot {
             code,
             qrData,
             isSingleUse,
+            usageCount,
             validFrom,
             validUntil,
             AccessCodeStatus.ACTIVE,
@@ -103,6 +112,7 @@ public class AccessCode extends AggregateRoot {
         String code,
         String qrData,
         boolean isSingleUse,
+        Integer usageCount,
         Instant validFrom,
         Instant validUntil,
         AccessCodeStatus status,
@@ -117,6 +127,7 @@ public class AccessCode extends AggregateRoot {
             code,
             qrData,
             isSingleUse,
+            usageCount,
             validFrom,
             validUntil,
             status,
@@ -221,6 +232,10 @@ public class AccessCode extends AggregateRoot {
 
     public boolean isSingleUse() {
         return isSingleUse;
+    }
+
+    public Integer getUsageCount() {
+        return usageCount;
     }
 
     public Instant getValidFrom() {

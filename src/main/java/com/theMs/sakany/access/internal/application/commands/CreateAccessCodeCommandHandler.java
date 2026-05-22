@@ -33,6 +33,7 @@ public class CreateAccessCodeCommandHandler {
             code,
             qrData,
             command.isSingleUse(),
+            command.usageCount(),
             command.validFrom(),
             command.validUntil()
         );

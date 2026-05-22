@@ -16,6 +16,7 @@ import com.theMs.sakany.access.internal.application.commands.RevokeAccessCodeCom
 import com.theMs.sakany.access.internal.application.commands.RevokeAccessCodeCommandHandler;
 import com.theMs.sakany.access.internal.application.commands.ScanAccessCodeCommand;
 import com.theMs.sakany.access.internal.application.commands.ScanAccessCodeCommandHandler;
+import com.theMs.sakany.access.internal.application.commands.ScanAccessCodeResult;
 import com.theMs.sakany.access.internal.application.queries.GetAccessCodeQuery;
 import com.theMs.sakany.access.internal.application.queries.GetAccessCodeQueryHandler;
 import com.theMs.sakany.access.internal.application.queries.ListAccessCodesQuery;
@@ -89,6 +90,7 @@ public class AccessController {
             request.visitorPhone(),
             request.purpose(),
             request.isSingleUse(),
+            request.usageCount(),
             request.validFrom(),
             request.validUntil()
         );
@@ -135,10 +137,21 @@ public class AccessController {
         @RequestBody ScanAccessCodeRequest request
     ) {
         ScanAccessCodeCommand command = new ScanAccessCodeCommand(code, request.gateNumber());
-        UUID visitLogId = scanAccessCodeHandler.handle(command);
+        ScanAccessCodeResult result = scanAccessCodeHandler.handle(command);
+        AccessCode accessCode = result.accessCode();
         
         return new ResponseEntity<>(
-            new ScanAccessCodeResponse(visitLogId),
+            new ScanAccessCodeResponse(
+                result.visitLogId(),
+                accessCode.getId(),
+                accessCode.getVisitorName(),
+                accessCode.getPurpose(),
+                accessCode.getValidUntil(),
+                accessCode.getStatus(),
+                accessCode.isSingleUse(),
+                accessCode.getUsageCount(),
+                accessCode.getUsedAt()
+            ),
             HttpStatus.CREATED
         );
     }
@@ -236,6 +249,7 @@ public class AccessController {
             accessCode.getCode(),
             accessCode.getQrData(),
             accessCode.isSingleUse(),
+            accessCode.getUsageCount(),
             accessCode.getValidFrom(),
             accessCode.getValidUntil(),
             accessCode.getStatus(),

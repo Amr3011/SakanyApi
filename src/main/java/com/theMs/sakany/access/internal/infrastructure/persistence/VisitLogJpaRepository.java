@@ -10,4 +10,6 @@ import java.util.List;
 public interface VisitLogJpaRepository extends JpaRepository<VisitLogEntity, UUID> {
     List<VisitLogEntity> findByResidentId(UUID residentId);
     List<VisitLogEntity> findByAccessCodeId(UUID accessCodeId);
+    boolean existsByAccessCodeId(UUID accessCodeId);
+    long countByAccessCodeId(UUID accessCodeId);
 }
