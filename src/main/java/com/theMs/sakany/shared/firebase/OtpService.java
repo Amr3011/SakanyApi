@@ -18,10 +18,9 @@ public class OtpService {
   private final Map<String, OtpData> otpStore = new ConcurrentHashMap<>();
 
   public String generateOtp(String phoneNumber) {
-    String otp = String.format("%06d", random.nextInt(1000000));
+    String otp = String.format("%0" + OTP_LENGTH + "d", random.nextInt((int) Math.pow(10, OTP_LENGTH)));
     otpStore.put(phoneNumber, new OtpData(otp, Instant.now().plusSeconds(OTP_VALIDITY_SECONDS)));
 
-    // TODO: Send OTP via SMS (Firebase Phone Auth or SMS service)
     System.out.println("OTP for " + phoneNumber + ": " + otp);
 
     return otp;

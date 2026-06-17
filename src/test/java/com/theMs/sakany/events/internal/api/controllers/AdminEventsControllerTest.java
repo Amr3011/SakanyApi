@@ -2,7 +2,7 @@ package com.theMs.sakany.events.internal.api.controllers;
 
 import com.theMs.sakany.events.internal.application.commands.ApproveEventCommand;
 import com.theMs.sakany.events.internal.application.commands.ApproveEventCommandHandler;
-import com.theMs.sakany.events.internal.application.commands.CancelEventCommandHandler;
+
 import com.theMs.sakany.events.internal.application.commands.CompleteEventCommand;
 import com.theMs.sakany.events.internal.application.commands.CompleteEventCommandHandler;
 import com.theMs.sakany.events.internal.application.commands.ProposeEventCommandHandler;
@@ -49,8 +49,6 @@ class AdminEventsControllerTest {
     @Mock
     private CompleteEventCommandHandler completeEventCommandHandler;
 
-    @Mock
-    private CancelEventCommandHandler cancelEventCommandHandler;
 
     private AdminEventsController controller;
 
@@ -62,8 +60,7 @@ class AdminEventsControllerTest {
                 proposeEventCommandHandler,
                 approveEventCommandHandler,
                 rejectEventCommandHandler,
-                completeEventCommandHandler,
-                cancelEventCommandHandler
+                completeEventCommandHandler
         );
     }
 

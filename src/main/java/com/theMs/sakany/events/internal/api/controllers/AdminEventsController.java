@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.theMs.sakany.events.internal.application.commands.ApproveEventCommand;
 import com.theMs.sakany.events.internal.application.commands.ApproveEventCommandHandler;
-import com.theMs.sakany.events.internal.application.commands.CancelEventCommandHandler;
 import com.theMs.sakany.events.internal.application.commands.CompleteEventCommand;
 import com.theMs.sakany.events.internal.application.commands.CompleteEventCommandHandler;
 import com.theMs.sakany.events.internal.application.commands.ProposeEventCommand;
@@ -55,7 +54,6 @@ public class AdminEventsController {
     private final ApproveEventCommandHandler approveEventCommandHandler;
     private final RejectEventCommandHandler rejectEventCommandHandler;
     private final CompleteEventCommandHandler completeEventCommandHandler;
-    private final CancelEventCommandHandler cancelEventCommandHandler;
 
     public AdminEventsController(
             AdminEventsManagerService adminEventsManagerService,
@@ -63,8 +61,7 @@ public class AdminEventsController {
             ProposeEventCommandHandler proposeEventCommandHandler,
             ApproveEventCommandHandler approveEventCommandHandler,
             RejectEventCommandHandler rejectEventCommandHandler,
-            CompleteEventCommandHandler completeEventCommandHandler,
-            CancelEventCommandHandler cancelEventCommandHandler
+            CompleteEventCommandHandler completeEventCommandHandler
     ) {
         this.adminEventsManagerService = adminEventsManagerService;
         this.adminEventCardMenuService = adminEventCardMenuService;
@@ -72,7 +69,6 @@ public class AdminEventsController {
         this.approveEventCommandHandler = approveEventCommandHandler;
         this.rejectEventCommandHandler = rejectEventCommandHandler;
         this.completeEventCommandHandler = completeEventCommandHandler;
-        this.cancelEventCommandHandler = cancelEventCommandHandler;
     }
 
     @GetMapping

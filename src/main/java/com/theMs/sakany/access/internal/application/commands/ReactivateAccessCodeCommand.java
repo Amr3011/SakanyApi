@@ -10,5 +10,5 @@ public record ReactivateAccessCodeCommand(
     UUID existingAccessCodeId,
     Instant validFrom,
     Instant validUntil
-) implements Command {
+) implements Command<Void> {
 }

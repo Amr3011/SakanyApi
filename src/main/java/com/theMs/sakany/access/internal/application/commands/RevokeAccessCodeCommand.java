@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public record RevokeAccessCodeCommand(
     UUID accessCodeId
-) implements Command {
+) implements Command<Void> {
 }

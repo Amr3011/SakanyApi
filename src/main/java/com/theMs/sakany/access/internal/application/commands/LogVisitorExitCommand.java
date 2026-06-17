@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public record LogVisitorExitCommand(
     UUID visitLogId
-) implements Command {
+) implements Command<Void> {
 }
