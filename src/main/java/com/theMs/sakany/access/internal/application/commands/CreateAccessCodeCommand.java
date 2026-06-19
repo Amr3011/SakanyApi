@@ -15,5 +15,5 @@ public record CreateAccessCodeCommand(
     Integer usageCount,
     Instant validFrom,
     Instant validUntil
-) implements Command {
+) implements Command<UUID> {
 }
